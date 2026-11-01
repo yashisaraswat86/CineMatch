@@ -6,14 +6,20 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Security
+DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
+
 SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
     "dev-only-change-this"
 )
 
-DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
+# Never allow the development key in production
+if not DEBUG and SECRET_KEY == "dev-only-change-this":
+    raise ValueError("DJANGO_SECRET_KEY must be configured in production.")
 
+# Allowed hosts
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(
@@ -23,6 +29,13 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+# Render automatically provides this hostname
+RENDER_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+
+if RENDER_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_HOSTNAME)
+
+# CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
@@ -31,6 +44,12 @@ CSRF_TRUSTED_ORIGINS = [
     ).split(",")
     if origin.strip()
 ]
+
+if RENDER_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append(
+        f"https://{RENDER_HOSTNAME}"
+    )
+
 
 # Applications
 INSTALLED_APPS = [
