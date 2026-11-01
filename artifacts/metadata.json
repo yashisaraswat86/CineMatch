@@ -1,0 +1,11 @@
+{
+  "users": 610,
+  "movies": 9742,
+  "ratings": 100836,
+  "latent_factors": 50,
+  "dataset": "ml-latest-small",
+  "similarity_storage": "top-k neighbors (sparse)",
+  "user_neighbors": 40,
+  "item_neighbors": 40,
+  "content_neighbors": 30
+}

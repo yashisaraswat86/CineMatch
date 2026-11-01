@@ -1,0 +1,13 @@
+
+Django>=6.1,<6.2
+numpy>=2.0
+pandas>=2.2
+scikit-learn>=1.5
+scipy>=1.13
+joblib>=1.4
+requests>=2.32
+gunicorn>=23,<24
+whitenoise>=6.9,<7
+dj-database-url>=2.3,<4
+psycopg[binary]>=3.2,<4
+

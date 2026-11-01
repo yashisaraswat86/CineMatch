@@ -1,0 +1,1 @@
+{% extends 'recommender/base.html' %}{% block title %}System health — CineMatch{% endblock %}{% block content %}<div class="auth"><span class="eyebrow">SYSTEM</span><h1>{% if ok %}Model is ready.{% else %}Model needs training.{% endif %}</h1>{% if ok %}<pre>{{ meta }}</pre>{% else %}<p>{{ error }}</p><code>python scripts/train.py</code>{% endif %}</div>{% endblock %}

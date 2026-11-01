@@ -1,0 +1,34 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+
+# Django
+*.sqlite3
+staticfiles/
+media/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Dataset files
+data/raw/*
+data/processed/*
+
+# Keep dataset directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Keep trained recommendation model
+# Do not ignore artifacts/model_bundle.joblib
+
+# Temporary files
+*.log
+.DS_Store
+config/settings_backup.py

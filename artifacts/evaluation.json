@@ -1,0 +1,115 @@
+{
+  "dataset": "ml-latest-small",
+  "split": "deterministic 80/20 per-user holdout",
+  "seed": 42,
+  "relevance_threshold": 4.0,
+  "negative_samples_per_user": 100,
+  "rating_prediction": {
+    "SVD": {
+      "RMSE": 0.92286,
+      "MAE": 0.71442,
+      "test_interactions": 20164
+    },
+    "User-KNN": {
+      "RMSE": 0.92511,
+      "MAE": 0.7066,
+      "test_interactions": 20164
+    },
+    "Item-KNN": {
+      "RMSE": 0.94933,
+      "MAE": 0.71465,
+      "test_interactions": 20164
+    },
+    "Hybrid": {
+      "RMSE": 0.86982,
+      "MAE": 0.66849,
+      "test_interactions": 20164
+    }
+  },
+  "ranking": {
+    "SVD": {
+      "Precision@10": 0.44967,
+      "Recall@10": 0.42606,
+      "NDCG@10": 0.61728,
+      "evaluated_users": 602
+    },
+    "User-KNN": {
+      "Precision@10": 0.35897,
+      "Recall@10": 0.39441,
+      "NDCG@10": 0.43421,
+      "evaluated_users": 602
+    },
+    "Item-KNN": {
+      "Precision@10": 0.39385,
+      "Recall@10": 0.42212,
+      "NDCG@10": 0.49398,
+      "evaluated_users": 602
+    },
+    "Hybrid-CF": {
+      "Precision@10": 0.44684,
+      "Recall@10": 0.46144,
+      "NDCG@10": 0.58219,
+      "evaluated_users": 602
+    }
+  },
+  "weight_optimization": {
+    "search": "all SVD/User-KNN/Item-KNN weight combinations in 0.1 increments summing to 1.0",
+    "rating_best_RMSE": {
+      "weights": {
+        "SVD": 0.3,
+        "User-KNN": 0.4,
+        "Item-KNN": 0.3
+      },
+      "RMSE": 0.8635210578693077,
+      "MAE": 0.6614955485613071
+    },
+    "rating_best_MAE": {
+      "weights": {
+        "SVD": 0.2,
+        "User-KNN": 0.4,
+        "Item-KNN": 0.4
+      },
+      "RMSE": 0.8641838593540365,
+      "MAE": 0.6611529499673754
+    },
+    "ranking_best_NDCG@10": {
+      "weights": {
+        "SVD": 0.9,
+        "User-KNN": 0.0,
+        "Item-KNN": 0.1
+      },
+      "Precision@10": 0.4691,
+      "Recall@10": 0.47686,
+      "NDCG@10": 0.63525,
+      "evaluated_users": 602
+    },
+    "ranking_best_Precision@10": {
+      "weights": {
+        "SVD": 0.9,
+        "User-KNN": 0.0,
+        "Item-KNN": 0.1
+      },
+      "Precision@10": 0.4691,
+      "Recall@10": 0.47686,
+      "NDCG@10": 0.63525,
+      "evaluated_users": 602
+    },
+    "ranking_best_Recall@10": {
+      "weights": {
+        "SVD": 0.9,
+        "User-KNN": 0.0,
+        "Item-KNN": 0.1
+      },
+      "Precision@10": 0.4691,
+      "Recall@10": 0.47686,
+      "NDCG@10": 0.63525,
+      "evaluated_users": 602
+    }
+  },
+  "notes": [
+    "All collaborative models are fitted using training interactions only.",
+    "Ranking metrics use sampled negatives and should be interpreted as sampled-ranking estimates.",
+    "Weight search uses the same holdout set for model selection; selected weights are exploratory and require confirmation on a separate untouched test set.",
+    "Hybrid-CF combines SVD, User-KNN and Item-KNN; content-based ranking is evaluated separately in the live personalized engine."
+  ]
+}
